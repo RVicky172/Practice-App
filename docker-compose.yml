@@ -1,0 +1,11 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_ENV: ${APP_ENV:-production}
+    image: practice-app:${APP_ENV:-production}
+    ports:
+      - "${PORT:-8080}:80"
+    restart: unless-stopped

@@ -1,0 +1,51 @@
+{
+  "name": "practice-app",
+  "version": "1.0.0",
+  "description": "Practice React app with Webpack and TypeScript",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack serve --mode development --env appEnv=development",
+    "start:qa": "webpack serve --mode development --env appEnv=qa",
+    "build": "webpack --mode production --env appEnv=production",
+    "build:qa": "webpack --mode production --env appEnv=qa",
+    "build:prod": "webpack --mode production --env appEnv=production",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.12.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-tree-inspector": "file:./react-tree-inspector",
+    "react-redux": "^9.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@tailwindcss/postcss": "^4.3.0",
+    "@types/react": "^19.2.15",
+    "@types/react-dom": "^19.2.3",
+    "@typescript-eslint/parser": "^8.60.0",
+    "babel-loader": "^10.1.1",
+    "babel-plugin-react-compiler": "^1.0.0",
+    "css-loader": "^7.1.4",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-simple-import-sort": "^13.0.0",
+    "html-webpack-plugin": "^5.6.7",
+    "postcss": "^8.5.15",
+    "postcss-loader": "^8.2.1",
+    "prettier": "^3.8.3",
+    "style-loader": "^4.0.0",
+    "tailwindcss": "^4.3.0",
+    "ts-loader": "^9.5.7",
+    "typescript": "^6.0.3",
+    "webpack": "^5.107.2",
+    "webpack-cli": "^7.0.2",
+    "webpack-dev-server": "^5.2.4"
+  }
+}

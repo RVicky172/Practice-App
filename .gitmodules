@@ -1,0 +1,3 @@
+[submodule "react-tree-inspector"]
+	path = react-tree-inspector
+	url = https://github.com/RVicky172/react-tree-inspector.git
