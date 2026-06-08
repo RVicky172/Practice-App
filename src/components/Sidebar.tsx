@@ -13,7 +13,9 @@ const sections: {
     heading: "React",
     topics: [
       { id: "todoapp", label: "Todo App" },
+      { id: "debouncethrottle", label: "Debounce & Throttle" },
       { id: "usestate", label: "useState" },
+      { id: "customusestate", label: "Custom useState" },
       { id: "useeffect", label: "useEffect" },
       { id: "useactionstate", label: "useActionState" },
       { id: "usecallback", label: "useCallback" },
@@ -40,7 +42,10 @@ const sections: {
   },
   {
     heading: "Redux",
-    topics: [{ id: "counter", label: "Counter" }],
+    topics: [
+      { id: "counter", label: "Counter" },
+      { id: "routingAuth", label: "Routing & Auth" },
+    ],
   },
 ];
 

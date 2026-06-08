@@ -7,7 +7,10 @@ import { RootState } from "./store";
 import Sidebar from "./components/Sidebar";
 import {
   Counter,
+  CustomUseState,
+  DebounceThrottleTodo,
   EventPropagation,
+  RoutingAuth,
   TodoAppTopic,
   UseActionState,
   UseCallBack,
@@ -33,7 +36,9 @@ import {
 const topicMap = {
   counter: <Counter />,
   todoapp: <TodoAppTopic />,
+  debouncethrottle: <DebounceThrottleTodo />,
   usestate: <UseState />,
+  customusestate: <CustomUseState />,
   useeffect: <UseEffect />,
   useactionstate: <UseActionState />,
   usecallback: <UseCallBack />,
@@ -53,6 +58,7 @@ const topicMap = {
   useref: <UseRef />,
   usesyncexternalstore: <UseSyncExternalStore />,
   usetransition: <UseTransition />,
+  routingAuth: <RoutingAuth />,
 };
 
 const App = () => {

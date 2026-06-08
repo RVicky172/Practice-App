@@ -4,6 +4,7 @@ export type TopicId =
   | "counter"
   | "todoapp"
   | "usestate"
+  | "customusestate"
   | "useeffect"
   | "useactionstate"
   | "usecallback"
@@ -22,7 +23,9 @@ export type TopicId =
   | "usereducer"
   | "useref"
   | "usetransition"
-  | "usesyncexternalstore";
+  | "usesyncexternalstore"
+  | "debouncethrottle"
+  | "routingAuth";
 
 interface TopicState {
   selected: TopicId;
