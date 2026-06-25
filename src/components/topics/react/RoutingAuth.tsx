@@ -26,7 +26,9 @@ import {
 // ==========================================
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated,
+  );
   const location = useLocation();
 
   if (!isAuthenticated) {
@@ -38,7 +40,9 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 };
 
 const PublicRoute = ({ children }: { children: React.ReactNode }) => {
-  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated,
+  );
 
   if (isAuthenticated) {
     // If already logged in, redirect to dashboard
@@ -53,7 +57,9 @@ const PublicRoute = ({ children }: { children: React.ReactNode }) => {
 // ==========================================
 
 const LandingPage = () => {
-  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated,
+  );
 
   return (
     <div className="space-y-6">
@@ -65,7 +71,9 @@ const LandingPage = () => {
           React Router & Redux Authentication
         </h3>
         <p className="mt-2 text-slate-600 max-w-xl mx-auto text-sm sm:text-base">
-          Welcome to the client-side routing demo. This sandbox runs a simulated web app inside a virtual browser using Redux for auth status and project data.
+          Welcome to the client-side routing demo. This sandbox runs a simulated
+          web app inside a virtual browser using Redux for auth status and
+          project data.
         </p>
         <div className="mt-6 flex justify-center gap-3">
           <Link
@@ -85,27 +93,44 @@ const LandingPage = () => {
 
       {/* Visual Explanation of Routing */}
       <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-        <h4 className="text-lg font-semibold text-slate-800">How routing & guards work here</h4>
+        <h4 className="text-lg font-semibold text-slate-800">
+          How routing & guards work here
+        </h4>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
           <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
-            <div className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold mx-auto mb-2">1</div>
-            <h5 className="font-semibold text-sm text-slate-700">Client-Side Router</h5>
+            <div className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold mx-auto mb-2">
+              1
+            </div>
+            <h5 className="font-semibold text-sm text-slate-700">
+              Client-Side Router
+            </h5>
             <p className="text-xs text-slate-500 mt-1">
-              `MemoryRouter` handles routing stack locally, making url updates visible in the mock address bar.
+              `MemoryRouter` handles routing stack locally, making url updates
+              visible in the mock address bar.
             </p>
           </div>
           <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
-            <div className="w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold mx-auto mb-2">2</div>
-            <h5 className="font-semibold text-sm text-slate-700">Redux Auth Sync</h5>
+            <div className="w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold mx-auto mb-2">
+              2
+            </div>
+            <h5 className="font-semibold text-sm text-slate-700">
+              Redux Auth Sync
+            </h5>
             <p className="text-xs text-slate-500 mt-1">
-              Route guards query Redux selectors (`isAuthenticated`). Changing auth state instantly triggers redirects.
+              Route guards query Redux selectors (`isAuthenticated`). Changing
+              auth state instantly triggers redirects.
             </p>
           </div>
           <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
-            <div className="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold mx-auto mb-2">3</div>
-            <h5 className="font-semibold text-sm text-slate-700">Protected Dummy Data</h5>
+            <div className="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold mx-auto mb-2">
+              3
+            </div>
+            <h5 className="font-semibold text-sm text-slate-700">
+              Protected Dummy Data
+            </h5>
             <p className="text-xs text-slate-500 mt-1">
-              Access to dummy projects data is restricted. Login populates state, logout cleans up active session.
+              Access to dummy projects data is restricted. Login populates
+              state, logout cleans up active session.
             </p>
           </div>
         </div>
@@ -128,7 +153,7 @@ const LoginPage = () => {
   // Get path user tried to access, default to dashboard
   const from = location.state?.from?.pathname || "/dashboard";
 
-  const handleLoginSubmit = (e: React.FormEvent) => {
+  const handleLoginSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!username.trim()) {
       setError("Please enter a username or select a quick option.");
@@ -150,14 +175,17 @@ const LoginPage = () => {
           Public Gate Route
         </span>
         <h3 className="text-2xl font-bold text-slate-800 pt-2">Sign In</h3>
-        <p className="text-slate-500 text-sm">Sign in to unlock protected routes & mock database</p>
+        <p className="text-slate-500 text-sm">
+          Sign in to unlock protected routes & mock database
+        </p>
       </div>
 
       {location.state?.from && (
         <div className="mb-4 p-3 bg-red-50 text-red-700 text-xs rounded-lg border border-red-100 flex items-center gap-2">
           <span>⚠️</span>
           <span>
-            You must log in to view <strong>{location.state.from.pathname}</strong>
+            You must log in to view{" "}
+            <strong>{location.state.from.pathname}</strong>
           </span>
         </div>
       )}
@@ -193,7 +221,9 @@ const LoginPage = () => {
           <div className="w-full border-t border-slate-100"></div>
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-white px-3 text-slate-400 font-semibold tracking-wider">Quick Accounts</span>
+          <span className="bg-white px-3 text-slate-400 font-semibold tracking-wider">
+            Quick Accounts
+          </span>
         </div>
       </div>
 
@@ -236,7 +266,7 @@ const DashboardPage = () => {
   const [priority, setPriority] = useState<"low" | "medium" | "high">("medium");
   const [status, setStatus] = useState<"todo" | "in_progress" | "done">("todo");
 
-  const handleAddProject = (e: React.FormEvent) => {
+  const handleAddProject = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!name.trim()) return;
 
@@ -249,8 +279,10 @@ const DashboardPage = () => {
   };
 
   const filteredProjects = projects.filter((project) => {
-    const priorityMatch = filterPriority === "all" || project.priority === filterPriority;
-    const statusMatch = filterStatus === "all" || project.status === filterStatus;
+    const priorityMatch =
+      filterPriority === "all" || project.priority === filterPriority;
+    const statusMatch =
+      filterStatus === "all" || project.status === filterStatus;
     return priorityMatch && statusMatch;
   });
 
@@ -261,9 +293,12 @@ const DashboardPage = () => {
           <span className="px-3 py-1 text-xs font-semibold text-emerald-600 bg-emerald-100/60 rounded-full uppercase tracking-wider">
             Protected Route
           </span>
-          <h3 className="text-2xl font-bold text-slate-800 mt-2">Projects Dashboard</h3>
+          <h3 className="text-2xl font-bold text-slate-800 mt-2">
+            Projects Dashboard
+          </h3>
           <p className="text-slate-500 text-xs sm:text-sm">
-            Manage dummy items stored in Redux. Changes immediately update across routes.
+            Manage dummy items stored in Redux. Changes immediately update
+            across routes.
           </p>
         </div>
 
@@ -283,7 +318,9 @@ const DashboardPage = () => {
           <h4 className="text-sm font-bold text-slate-700">Add New Project</h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-slate-500">Project Name</label>
+              <label className="text-xs font-semibold text-slate-500">
+                Project Name
+              </label>
               <input
                 type="text"
                 required
@@ -295,7 +332,9 @@ const DashboardPage = () => {
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-500">Priority</label>
+                <label className="text-xs font-semibold text-slate-500">
+                  Priority
+                </label>
                 <select
                   className="w-full px-3 py-2 border border-slate-200 rounded-lg text-xs bg-white focus:outline-none"
                   value={priority}
@@ -307,7 +346,9 @@ const DashboardPage = () => {
                 </select>
               </div>
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-500">Status</label>
+                <label className="text-xs font-semibold text-slate-500">
+                  Status
+                </label>
                 <select
                   className="w-full px-3 py-2 border border-slate-200 rounded-lg text-xs bg-white focus:outline-none"
                   value={status}
@@ -321,7 +362,9 @@ const DashboardPage = () => {
             </div>
           </div>
           <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-500">Description</label>
+            <label className="text-xs font-semibold text-slate-500">
+              Description
+            </label>
             <textarea
               className="w-full px-3 py-2 border border-slate-200 rounded-lg text-xs bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20"
               rows={2}
@@ -378,7 +421,9 @@ const DashboardPage = () => {
       {/* Projects List */}
       <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
         {filteredProjects.length === 0 ? (
-          <div className="p-8 text-center text-slate-400 text-sm">No projects match the filter.</div>
+          <div className="p-8 text-center text-slate-400 text-sm">
+            No projects match the filter.
+          </div>
         ) : (
           <div className="divide-y divide-slate-100">
             {filteredProjects.map((project) => (
@@ -417,7 +462,9 @@ const DashboardPage = () => {
                       {project.status.replace("_", " ")}
                     </span>
                   </div>
-                  <p className="text-xs text-slate-500 line-clamp-1">{project.description}</p>
+                  <p className="text-xs text-slate-500 line-clamp-1">
+                    {project.description}
+                  </p>
                 </div>
 
                 <div className="flex items-center gap-2">
@@ -454,7 +501,7 @@ const ProjectDetailsPage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const project = useSelector((state: RootState) =>
-    state.auth.projects.find((p) => p.id === id)
+    state.auth.projects.find((p) => p.id === id),
   );
 
   if (!project) {
@@ -481,7 +528,7 @@ const ProjectDetailsPage = () => {
       updateProject({
         ...project,
         status: nextStatus[project.status],
-      })
+      }),
     );
   };
 
@@ -495,7 +542,7 @@ const ProjectDetailsPage = () => {
       updateProject({
         ...project,
         priority: nextPriority[project.priority],
-      })
+      }),
     );
   };
 
@@ -513,7 +560,9 @@ const ProjectDetailsPage = () => {
         <div className="flex justify-between items-start gap-4 border-b border-slate-100 pb-4">
           <div className="space-y-1">
             <h3 className="text-xl font-bold text-slate-800">{project.name}</h3>
-            <p className="text-slate-400 text-xs">Created: {project.createdAt} | ID: {project.id}</p>
+            <p className="text-slate-400 text-xs">
+              Created: {project.createdAt} | ID: {project.id}
+            </p>
           </div>
           <div className="flex gap-2">
             <span
@@ -542,7 +591,9 @@ const ProjectDetailsPage = () => {
         </div>
 
         <div className="space-y-2">
-          <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400">Description</h4>
+          <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+            Description
+          </h4>
           <p className="text-slate-600 text-sm leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-100/50">
             {project.description || "No description provided."}
           </p>
@@ -598,22 +649,32 @@ const SettingsPage = () => {
         <span className="px-3 py-1 text-xs font-semibold text-emerald-600 bg-emerald-100/60 rounded-full uppercase tracking-wider">
           Protected Route
         </span>
-        <h3 className="text-2xl font-bold text-slate-800 mt-2">Account Settings</h3>
-        <p className="text-slate-500 text-sm">Modify mock preferences and check profile data</p>
+        <h3 className="text-2xl font-bold text-slate-800 mt-2">
+          Account Settings
+        </h3>
+        <p className="text-slate-500 text-sm">
+          Modify mock preferences and check profile data
+        </p>
       </div>
 
       <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-4">
-            <h4 className="text-sm font-bold text-slate-700 uppercase tracking-wider border-b pb-2">Profile Details</h4>
+            <h4 className="text-sm font-bold text-slate-700 uppercase tracking-wider border-b pb-2">
+              Profile Details
+            </h4>
             <div className="space-y-2.5 text-xs">
               <div>
                 <p className="font-semibold text-slate-400">Username</p>
-                <p className="font-bold text-slate-700 text-sm mt-0.5">{user?.username}</p>
+                <p className="font-bold text-slate-700 text-sm mt-0.5">
+                  {user?.username}
+                </p>
               </div>
               <div>
                 <p className="font-semibold text-slate-400">Email Address</p>
-                <p className="font-bold text-slate-700 text-sm mt-0.5">{user?.email}</p>
+                <p className="font-bold text-slate-700 text-sm mt-0.5">
+                  {user?.email}
+                </p>
               </div>
               <div>
                 <p className="font-semibold text-slate-400">Authorized Role</p>
@@ -627,9 +688,13 @@ const SettingsPage = () => {
           </div>
 
           <div className="space-y-4">
-            <h4 className="text-sm font-bold text-slate-700 uppercase tracking-wider border-b pb-2">Session Debugger</h4>
+            <h4 className="text-sm font-bold text-slate-700 uppercase tracking-wider border-b pb-2">
+              Session Debugger
+            </h4>
             <div className="p-4 bg-slate-50 rounded-xl border border-slate-100/80 font-mono text-[10px] text-slate-600 overflow-x-auto space-y-2">
-              <p className="font-semibold text-slate-500">// Redux auth.user state</p>
+              <p className="font-semibold text-slate-500">
+                // Redux auth.user state
+              </p>
               <pre>{JSON.stringify(user, null, 2)}</pre>
             </div>
           </div>
@@ -645,7 +710,9 @@ const SettingsPage = () => {
 
 const RoutingDemoInner = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated,
+  );
   const user = useSelector((state: RootState) => state.auth.user);
 
   const location = useLocation();
@@ -689,7 +756,9 @@ const RoutingDemoInner = () => {
 
         {/* Mock Address Bar */}
         <div className="flex-1 max-w-lg bg-slate-950 border border-slate-800 rounded-lg px-3 py-1 flex items-center gap-2 text-xs text-slate-400 font-mono select-all">
-          <span className="text-slate-600">https://react-redux-sandbox.local</span>
+          <span className="text-slate-600">
+            https://react-redux-sandbox.local
+          </span>
           <span className="text-slate-300 font-bold">{location.pathname}</span>
         </div>
 
@@ -698,8 +767,12 @@ const RoutingDemoInner = () => {
           {isAuthenticated ? (
             <>
               <div className="text-xs text-right hidden sm:block">
-                <p className="text-slate-300 font-semibold leading-none">{user?.username}</p>
-                <p className="text-[10px] text-slate-500 leading-none mt-1">{user?.role}</p>
+                <p className="text-slate-300 font-semibold leading-none">
+                  {user?.username}
+                </p>
+                <p className="text-[10px] text-slate-500 leading-none mt-1">
+                  {user?.role}
+                </p>
               </div>
               <button
                 onClick={() => {
@@ -727,7 +800,9 @@ const RoutingDemoInner = () => {
         <Link
           to="/"
           className={`transition ${
-            location.pathname === "/" ? "text-blue-600" : "text-slate-500 hover:text-slate-700"
+            location.pathname === "/"
+              ? "text-blue-600"
+              : "text-slate-500 hover:text-slate-700"
           }`}
         >
           Home (Public)
@@ -735,7 +810,8 @@ const RoutingDemoInner = () => {
         <Link
           to="/dashboard"
           className={`transition ${
-            location.pathname.startsWith("/dashboard") && location.pathname !== "/dashboard/settings"
+            location.pathname.startsWith("/dashboard") &&
+            location.pathname !== "/dashboard/settings"
               ? "text-blue-600"
               : "text-slate-500 hover:text-slate-700"
           }`}
@@ -746,7 +822,9 @@ const RoutingDemoInner = () => {
           <Link
             to="/dashboard/settings"
             className={`transition ${
-              location.pathname === "/dashboard/settings" ? "text-blue-600" : "text-slate-500 hover:text-slate-700"
+              location.pathname === "/dashboard/settings"
+                ? "text-blue-600"
+                : "text-slate-500 hover:text-slate-700"
             }`}
           >
             Settings (Protected)
@@ -803,12 +881,16 @@ const RoutingDemoInner = () => {
               isAuthenticated ? "bg-emerald-500 animate-pulse" : "bg-slate-300"
             }`}
           ></span>
-          <span>{isAuthenticated ? "Session Active" : "No Session / Guest Mode"}</span>
+          <span>
+            {isAuthenticated ? "Session Active" : "No Session / Guest Mode"}
+          </span>
         </div>
         <div>
           <span>Route type: </span>
           <span className="font-bold font-mono">
-            {location.pathname === "/" || location.pathname === "/login" ? "Public" : "Protected (Guard active)"}
+            {location.pathname === "/" || location.pathname === "/login"
+              ? "Public"
+              : "Protected (Guard active)"}
           </span>
         </div>
       </div>
@@ -824,9 +906,12 @@ const RoutingAuth = () => {
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-1.5">
-        <h2 className="text-2xl font-bold text-slate-800">Routing & Auth Demo</h2>
+        <h2 className="text-2xl font-bold text-slate-800">
+          Routing & Auth Demo
+        </h2>
         <p className="text-slate-500 text-sm">
-          A demonstration of React Router with guarded paths and central authentication sync in Redux.
+          A demonstration of React Router with guarded paths and central
+          authentication sync in Redux.
         </p>
       </div>
 

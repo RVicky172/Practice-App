@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { type SubmitEvent, useState } from "react";
 
 type TodoInputProps = {
   onAddTodo: (text: string) => void;
@@ -7,7 +7,7 @@ type TodoInputProps = {
 function TodoInput({ onAddTodo }: TodoInputProps) {
   const [value, setValue] = useState("");
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     const trimmedValue = value.trim();
 
@@ -20,15 +20,18 @@ function TodoInput({ onAddTodo }: TodoInputProps) {
   };
 
   return (
-    <form className="flex gap-2" onSubmit={handleSubmit}>
+    <form
+      className="flex gap-2 transition-colors duration-300"
+      onSubmit={handleSubmit}
+    >
       <input
-        className="flex-1 border border-gray-300 rounded px-3 py-2"
+        className="flex-1 border rounded px-3 py-2 transition-colors duration-300 bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600 text-slate-900 dark:text-slate-100"
         placeholder="Add a todo"
         value={value}
         onChange={(event) => setValue(event.target.value)}
       />
       <button
-        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        className="px-4 py-2 rounded font-semibold transition-all duration-300 hover:shadow-md active:scale-95 bg-blue-600 dark:bg-blue-500 text-white"
         type="submit"
       >
         Add

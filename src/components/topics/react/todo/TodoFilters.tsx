@@ -20,10 +20,10 @@ function TodoFilters({ activeFilter, onChangeFilter }: TodoFiltersProps) {
         return (
           <button
             key={filter.value}
-            className={`px-3 py-1 rounded border ${
+            className={`px-3 py-1 rounded border font-medium transition-all duration-300 ${
               isActive
-                ? "bg-gray-800 text-white border-gray-800"
-                : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+                ? "bg-blue-600 dark:bg-blue-500 text-white border-blue-600 dark:border-blue-500"
+                : "bg-white dark:bg-slate-700 text-gray-700 dark:text-slate-300 border-gray-300 dark:border-slate-600"
             }`}
             onClick={() => onChangeFilter(filter.value)}
             type="button"

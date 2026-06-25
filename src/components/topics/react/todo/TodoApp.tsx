@@ -1,4 +1,4 @@
-import { useActionState, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useReducer, useState } from "react";
 
 import TodoFilters from "./TodoFilters";
 import TodoInput from "./TodoInput";
@@ -17,7 +17,7 @@ type TodoAction =
   | { type: "delete"; id: number }
   | { type: "toggle"; id: number };
 
-async function todoAction(previousState: TodoState, action: TodoAction) {
+ function todoAction(previousState: TodoState, action: TodoAction) {
   switch (action.type) {
     case "hydrate":
       return { todos: action.todos };
@@ -48,7 +48,7 @@ async function todoAction(previousState: TodoState, action: TodoAction) {
 }
 
 function TodoApp() {
-  const [state, dispatchAction] = useActionState(todoAction, { todos: [] });
+  const [state, dispatchAction] = useReducer(todoAction, { todos: [] });
   const [filter, setFilter] = useState<TodoFilter>("all");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -118,9 +118,11 @@ function TodoApp() {
   }, [filter, state.todos]);
 
   return (
-    <section className="max-w-2xl mx-auto p-5 bg-white rounded-lg shadow-sm border border-gray-200">
-      <h2 className="text-2xl font-bold mb-2">Todo Application</h2>
-      <p className="text-gray-500 mb-4">
+    <section className="max-w-2xl mx-auto p-5 rounded-lg shadow-sm border transition-colors duration-300 bg-white dark:bg-slate-900 border-gray-300 dark:border-slate-700">
+      <h2 className="text-2xl font-bold mb-2 transition-colors duration-300 text-slate-900 dark:text-slate-100">
+        Todo Application
+      </h2>
+      <p className="mb-4 transition-colors duration-300 text-slate-500 dark:text-slate-400">
         Add, toggle, delete, and filter todos using React + TypeScript.
       </p>
 
@@ -131,16 +133,27 @@ function TodoApp() {
       </div>
 
       <div className="mt-4">
-        {isLoading && <p className="text-sm text-gray-500">Loading todos...</p>}
-        {error && <p className="text-sm text-red-600">{error}</p>}
+        {isLoading && (
+          <p className="text-sm transition-colors duration-300 text-slate-500 dark:text-slate-400">
+            Loading todos...
+          </p>
+        )}
+        {error && (
+          <p className="text-sm transition-colors duration-300 text-red-600 dark:text-red-400">
+            {error}
+          </p>
+        )}
         {!isLoading && filteredTodos.length === 0 && (
-          <p className="text-sm text-gray-500">No todos for this filter.</p>
+          <p className="text-sm transition-colors duration-300 text-slate-500 dark:text-slate-400">
+            No todos for this filter.
+          </p>
         )}
 
         <ul className="space-y-2">
           {filteredTodos.map((todo) => (
             <TodoItem
-              key={todo.id}
+              key={todo.id
+              }
               onDeleteTodo={handleDeleteTodo}
               onToggleTodo={handleToggleTodo}
               todo={todo}
